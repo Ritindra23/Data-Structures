@@ -1,0 +1,118 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define SIZE 10
+
+struct stack
+{
+	int items[SIZE];
+	int top;
+};
+typedef struct stack stk;
+
+int push(stk *s,int k)
+{
+	if(s->top>=SIZE-1)
+	{
+		printf("Stack Overflow\n");
+		return 0;
+	}
+	else
+	{
+		s->top++;
+		s->items[s->top]=k;
+		return 0;
+	}
+}
+
+int pop(stk *s)
+{
+	int k;
+	if(s->top==-1)
+	{
+		printf("Stack Overflow\n");
+		return -1;
+	}
+	else
+	{
+		k=s->items[s->top];
+		s->top--;
+		return k;
+	}
+}
+
+int peep(stk *s)
+{
+	int k;
+	if(s->top==-1)
+	{
+		printf("Stack Empty\n");
+		return -1;
+	}
+	else
+	{
+		k=s->items[s->top];
+		return k; 
+	}
+}
+
+int display(stk *s)
+{
+	int i=s->top;
+	if(s->top==-1)
+	{
+		printf("Stack is empty\n");
+		return 0;
+	}
+	while(i>-1)
+	{
+		printf("%d\n",s->items[i]);
+		i--;
+	}
+return 0;
+}
+
+int main()
+{
+	int i,k;
+	stk s;
+	s.top=-1;
+	while(1)
+	{	printf("Enter the below option to perform in stack :-\n");
+		printf("1 : Push\n2 : Pop\n3 : Peep\n4 : Display\n5 : Exit\n");
+		scanf("%d",&i);
+		
+		switch(i)
+		{
+			case 1:{
+				printf("Enter iems to add : ");
+				scanf("%d",&k);
+				push(&s,k);
+				break;
+			} 
+			case 2:{
+				k=pop(&s);
+				if(k!=-1)
+				printf("Popped element is %d\n",k);
+				break;
+			}
+			case 3:{
+				k=peep(&s);
+				if(k!=-1)
+				printf("%d\n",k);
+				break;
+			}
+			case 4:{
+				display(&s);
+				break;
+			}
+			case 5:{
+				exit(0);
+			}
+			default :{
+				printf("Invalid input\n");
+				break;
+			}
+		}
+	}
+	
+}
